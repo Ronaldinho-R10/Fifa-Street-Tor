@@ -77,11 +77,12 @@ def main():
     st.write("\nGrupos Criados:")
     for nome_grupo, equipes_grupo in grupos.items():
         st.write(f"{nome_grupo}:")
-        table_data = []
-        for equipe in equipes_grupo:
-            cor_equipe = CORES_EQUIPES[equipe]
-            table_data.append([f'{EMOJIS_EQUIPES[equipe]} {equipe}', f'<span style="color:{cor_equipe}; font-size:20px">{EMOJIS_EQUIPES[equipe]} {equipe}</span>'])
-        st.table(table_data)
+        with st.beta_container():
+            st.write("| Equipe |")
+            st.write("| --- |")
+            for equipe in equipes_grupo:
+                cor_equipe = CORES_EQUIPES[equipe]
+                st.write(f"| <span style='color:{cor_equipe}; font-size:20px'>{EMOJIS_EQUIPES[equipe]} {equipe}</span> |", unsafe_allow_html=True)
 
     jogos = gerar_jogos(grupos)
 
