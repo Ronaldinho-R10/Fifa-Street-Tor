@@ -1,5 +1,6 @@
 import streamlit as st
 import itertools
+import random
 
 # Dicionário com as cores correspondentes aos países
 CORES_EQUIPES = {
@@ -27,6 +28,7 @@ CORES_EQUIPES = {
 
 def cadastrar_equipes():
     equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()))
+    random.shuffle(equipes_selecionadas)
     return equipes_selecionadas
 
 def criar_grupos(equipes):
