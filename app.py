@@ -26,7 +26,7 @@ CORES_EQUIPES = {
 }
 
 def cadastrar_equipes():
-    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()))
+    equipes_selecionadas = st.multiselect("Selecione as equipes:",label, options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()))
     return equipes_selecionadas
 
 def criar_grupos(equipes):
