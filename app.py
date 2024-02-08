@@ -1,15 +1,56 @@
 import streamlit as st
 import itertools
 
-EQUIPES = [
-    "Alemanha", "Argentina", "Austrália", "Brasil", "Camarões",
-    "Coreia do Sul", "Dinamarca", "Escócia", "Espanha", "Estados Unidos",
-    "França", "Grécia", "Inglaterra", "República da Irlanda", "Itália",
-    "México", "Nigéria", "Portugal", "Chéquia", "Suécia"
-]
+# Dicionário com as cores correspondentes aos países
+CORES_EQUIPES = {
+    "Alemanha": "#000000",
+    "Argentina": "#75AADB",
+    "Austrália": "#FFD700",
+    "Brasil": "#FFD700",
+    "Camarões": "#008000",
+    "Coreia do Sul": "#FF0000",
+    "Dinamarca": "#C60C30",
+    "Escócia": "#003399",
+    "Espanha": "#FF0000",
+    "Estados Unidos": "#B22222",
+    "França": "#0055A4",
+    "Grécia": "#0D5EAF",
+    "Inglaterra": "#FFFFFF",
+    "República da Irlanda": "#169B62",
+    "Itália": "#009246",
+    "México": "#006847",
+    "Nigéria": "#32CD32",
+    "Portugal": "#00843D",
+    "Chéquia": "#D41245",
+    "Suécia": "#0065BD"
+}
+
+# Dicionário com os emojis correspondentes aos países
+EMOJIS_EQUIPES = {
+    "Alemanha": "🇩🇪",
+    "Argentina": "🇦🇷",
+    "Austrália": "🇦🇺",
+    "Brasil": "🇧🇷",
+    "Camarões": "🇨🇲",
+    "Coreia do Sul": "🇰🇷",
+    "Dinamarca": "🇩🇰",
+    "Escócia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    "Espanha": "🇪🇸",
+    "Estados Unidos": "🇺🇸",
+    "França": "🇫🇷",
+    "Grécia": "🇬🇷",
+    "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "República da Irlanda": "🇮🇪",
+    "Itália": "🇮🇹",
+    "México": "🇲🇽",
+    "Nigéria": "🇳🇬",
+    "Portugal": "🇵🇹",
+    "Chéquia": "🇨🇿",
+    "Suécia": "🇸🇪"
+}
 
 def cadastrar_equipes():
-    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=EQUIPES, default=EQUIPES)
+    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()))
     return equipes_selecionadas
 
 def criar_grupos(equipes):
@@ -35,7 +76,11 @@ def main():
 
     st.write("\nGrupos Criados:")
     for nome_grupo, equipes_grupo in grupos.items():
-        st.write(f"{nome_grupo}: {equipes_grupo}")
+        st.write(f"{nome_grupo}:")
+        for equipe in equipes_grupo:
+            cor_equipe = CORES_EQUIPES[equipe]
+            emoji_equipe = EMOJIS_EQUIPES[equipe]
+            st.markdown(f'<span style="color:{cor_equipe}; font-size:20px">{emoji_equipe} {equipe}</span>', unsafe_allow_html=True)
 
     jogos = gerar_jogos(grupos)
 
