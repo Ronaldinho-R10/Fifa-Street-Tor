@@ -25,28 +25,28 @@ CORES_EQUIPES = {
     "Suécia": "#0065BD"
 }
 
-# Dicionário com os emojis correspondentes aos países
+# Dicionário com os emojis correspondentes aos países no formato Markdown
 EMOJIS_EQUIPES = {
-    "Alemanha": "🇩🇪",
-    "Argentina": "🇦🇷",
-    "Austrália": "🇦🇺",
-    "Brasil": "🇧🇷",
-    "Camarões": "🇨🇲",
-    "Coreia do Sul": "🇰🇷",
-    "Dinamarca": "🇩🇰",
-    "Escócia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
-    "Espanha": "🇪🇸",
-    "Estados Unidos": "🇺🇸",
-    "França": "🇫🇷",
-    "Grécia": "🇬🇷",
-    "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-    "República da Irlanda": "🇮🇪",
-    "Itália": "🇮🇹",
-    "México": "🇲🇽",
-    "Nigéria": "🇳🇬",
-    "Portugal": "🇵🇹",
-    "Chéquia": "🇨🇿",
-    "Suécia": "🇸🇪"
+    "Alemanha": ":flag-de:",
+    "Argentina": ":flag-ar:",
+    "Austrália": ":flag-au:",
+    "Brasil": ":flag-br:",
+    "Camarões": ":flag-cm:",
+    "Coreia do Sul": ":flag-kr:",
+    "Dinamarca": ":flag-dk:",
+    "Escócia": ":flag-scotland:",
+    "Espanha": ":flag-es:",
+    "Estados Unidos": ":flag-us:",
+    "França": ":flag-fr:",
+    "Grécia": ":flag-gr:",
+    "Inglaterra": ":flag-england:",
+    "República da Irlanda": ":flag-ie:",
+    "Itália": ":flag-it:",
+    "México": ":flag-mx:",
+    "Nigéria": ":flag-ng:",
+    "Portugal": ":flag-pt:",
+    "Chéquia": ":flag-cz:",
+    "Suécia": ":flag-se:"
 }
 
 def cadastrar_equipes():
