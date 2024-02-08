@@ -16,7 +16,7 @@ CORES_EQUIPES = {
 }
 
 def cadastrar_equipes():
-    equipes_selecionadas = random.sample(PAISES, len(PAISES))
+    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=PAISES, default=PAISES)
     return equipes_selecionadas
 
 def criar_grupos(equipes):
