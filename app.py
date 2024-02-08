@@ -19,14 +19,14 @@ CORES_EQUIPES = {
     "República da Irlanda": "#169B62",
     "Itália": "#009246",
     "México": "#006847",
-    "Nigéria": ":flag-ni:",
+    "Nigéria": "#32CD32",
     "Portugal": "#00843D",
     "Chéquia": "#D41245",
     "Suécia": "#0065BD"
 }
 
 def cadastrar_equipes():
-    equipes_selecionadas = st.multiselect("Selecione as equipes:",label, options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()))
+    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()))
     return equipes_selecionadas
 
 def criar_grupos(equipes):
