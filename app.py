@@ -61,8 +61,10 @@ def main():
     jogos = gerar_jogos(grupos)
 
     st.write("\nJogos Gerados:")
+    table_jogos = [["Jogo", "Equipes"]]
     for idx, jogo in enumerate(jogos, start=1):
-        st.write(f"Jogo {idx}: {jogo[0]} vs {jogo[1]}")
+        table_jogos.append([f"Jogo {idx}", f"{jogo[0]} vs {jogo[1]}"])
+    st.table(table_jogos)
 
 if __name__ == "__main__":
     main()
