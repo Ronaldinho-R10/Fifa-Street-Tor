@@ -2,36 +2,25 @@ import streamlit as st
 import itertools
 import random
 
+# Lista de países
+PAISES = [
+    "Alemanha", "Argentina", "Austrália", "Brasil", "Camarões",
+    "Coreia do Sul", "Dinamarca", "Escócia", "Espanha", "Estados Unidos",
+    "França", "Grécia", "Inglaterra", "República da Irlanda", "Itália",
+    "México", "Nigéria", "Portugal", "Chéquia", "Suécia"
+]
+
 # Dicionário com as cores correspondentes aos países
 CORES_EQUIPES = {
-    "Alemanha": "#000000",
-    "Argentina": "#75AADB",
-    "Austrália": "#FFD700",
-    "Brasil": "#FFD700",
-    "Camarões": "#008000",
-    "Coreia do Sul": "#FF0000",
-    "Dinamarca": "#C60C30",
-    "Escócia": "#003399",
-    "Espanha": "#FF0000",
-    "Estados Unidos": "#B22222",
-    "França": "#0055A4",
-    "Grécia": "#0D5EAF",
-    "Inglaterra": "#FFFFFF",
-    "República da Irlanda": "#169B62",
-    "Itália": "#009246",
-    "México": "#006847",
-    "Nigéria": "#32CD32",
-    "Portugal": "#00843D",
-    "Chéquia": "#D41245",
-    "Suécia": "#0065BD"
+    pais: "#{:06x}".format(random.randint(0, 0xFFFFFF)) for pais in PAISES
 }
 
 def cadastrar_equipes():
-    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()))
-    random.shuffle(equipes_selecionadas)
+    equipes_selecionadas = random.sample(PAISES, len(PAISES))
     return equipes_selecionadas
 
 def criar_grupos(equipes):
+    random.shuffle(equipes)  # Embaralha as equipes
     grupos = [f"Grupo {i}" for i in range(1, 6)]
     equipe_por_grupo = len(equipes) // len(grupos)
     grupos_equipes = [equipes[i:i + equipe_por_grupo] for i in range(0, len(equipes), equipe_por_grupo)]
@@ -41,6 +30,7 @@ def gerar_jogos(grupos):
     jogos = []
     for grupo in grupos.values():
         jogos_grupo = list(itertools.combinations(grupo, 2))
+        random.shuffle(jogos_grupo)  # Embaralha os jogos
         jogos.extend(jogos_grupo)
     return jogos
 
