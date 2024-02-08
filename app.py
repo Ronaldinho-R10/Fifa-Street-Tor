@@ -1,6 +1,7 @@
 import streamlit as st
 import itertools
 import random
+import json
 
 # Lista de países
 PAISES = [
@@ -34,50 +35,37 @@ def gerar_jogos(grupos):
         jogos.extend(jogos_grupo)
     return jogos
 
-def cadastrar_placar(jogos):
-    st.title("Cadastro de Placar")
-    st.write("Insira o placar de cada jogo:")
-
-    placares = []
-    for idx, jogo in enumerate(jogos, start=1):
-        placar = st.text_input(f"Placar do Jogo {idx} ({jogo[0]} vs {jogo[1]}):", key=f"placar_{idx}")
-        placares.append(placar)
-
-    st.write("\nPlacares cadastrados:")
-    for idx, placar in enumerate(placares, start=1):
-        st.write(f"Jogo {idx}: {placar}")
-
 def main():
-    menu = ["Cadastro de Equipes e Geração de Jogos", "Cadastro de Placar"]
-    choice = st.sidebar.selectbox("Menu", menu)
+    st.title("Cadastro de Equipes e Geração de Jogos")
+    st.write("Por favor, selecione as equipes participantes:")
 
-    if choice == "Cadastro de Equipes e Geração de Jogos":
-        st.title("Cadastro de Equipes e Geração de Jogos")
-        st.write("Por favor, selecione as equipes participantes:")
+    equipes_selecionadas = cadastrar_equipes()
 
-        equipes_selecionadas = cadastrar_equipes()
+    grupos = criar_grupos(equipes_selecionadas)
 
-        grupos = criar_grupos(equipes_selecionadas)
+    st.write("\nGrupos Criados:")
+    for nome_grupo, equipes_grupo in grupos.items():
+        st.write(f"{nome_grupo}:")
+        table_data = []
+        for equipe in equipes_grupo:
+            table_data.append([equipe])
+        st.table(table_data)
 
-        st.write("\nGrupos Criados:")
-        for nome_grupo, equipes_grupo in grupos.items():
-            st.write(f"{nome_grupo}:")
-            table_data = []
-            for equipe in equipes_grupo:
-                table_data.append([equipe])
-            st.table(table_data)
+    jogos = gerar_jogos(grupos)
 
-        jogos = gerar_jogos(grupos)
+    st.write("\nJogos Gerados:")
+    table_jogos = [["Jogo", "Equipes"]]
+    for idx, jogo in enumerate(jogos, start=1):
+        table_jogos.append([f"Jogo {idx}", f"{jogo[0]} vs {jogo[1]}"])
+    st.table(table_jogos)
 
-        st.write("\nJogos Gerados:")
-        table_jogos = [["Jogo", "Equipes"]]
-        for idx, jogo in enumerate(jogos, start=1):
-            table_jogos.append([f"Jogo {idx}", f"{jogo[0]} vs {jogo[1]}"])
-        st.table(table_jogos)
-
-    elif choice == "Cadastro de Placar":
-        jogos = gerar_jogos(criar_grupos(cadastrar_equipes()))
-        cadastrar_placar(jogos)
+    # Serialize os dados em JSON
+    dados_json = {
+        "Equipes": equipes_selecionadas,
+        "Grupos": grupos,
+        "Jogos": jogos
+    }
+    st.json(dados_json)
 
 if __name__ == "__main__":
     main()
