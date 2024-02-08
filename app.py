@@ -36,14 +36,15 @@ def criar_grupos(equipes):
     return dict(zip(grupos, grupos_equipes))
 
 def gerar_jogos(grupos):
-    jogos = {}
-    for nome_grupo, equipes_grupo in grupos.items():
-        jogos_grupo = list(itertools.combinations(equipes_grupo, 2))
-        jogos[nome_grupo] = jogos_grupo
+    jogos = []
+    for grupo in grupos.values():
+        jogos_grupo = list(itertools.combinations(grupo, 2))
+        jogos.extend(jogos_grupo)
     return jogos
 
 def main():
-    st.title("Cadastro de Equipes, Geração de Grupos e Jogos")
+    st.title("Cadastro de Equipes e Geração de Jogos")
+    st.write("Por favor, selecione as equipes participantes:")
 
     equipes_selecionadas = cadastrar_equipes()
 
@@ -51,22 +52,16 @@ def main():
 
     st.write("\nGrupos Criados:")
     for nome_grupo, equipes_grupo in grupos.items():
-        st.subheader(nome_grupo)
+        st.write(f"{nome_grupo}:")
         for equipe in equipes_grupo:
             cor_equipe = CORES_EQUIPES[equipe]
-            st.markdown(f'<span style="color:{cor_equipe}; font-size:18px">{equipe}</span>', unsafe_allow_html=True)
+            st.markdown(f'<span style="color:{cor_equipe}; font-size:20px">{equipe}</span>', unsafe_allow_html=True)
 
     jogos = gerar_jogos(grupos)
 
     st.write("\nJogos Gerados:")
-    for nome_grupo, jogos_grupo in jogos.items():
-        st.subheader(f"Jogos do {nome_grupo}:")
-        for idx, jogo in enumerate(jogos_grupo, start=1):
-            equipe_1 = jogo[0]
-            equipe_2 = jogo[1]
-            st.write(f"Jogo {idx}: {equipe_1} vs {equipe_2}")
-            placar_equipe_1 = st.number_input(f"Placar de {equipe_1}", min_value=0, step=1)
-            placar_equipe_2 = st.number_input(f"Placar de {equipe_2}", min_value=0, step=1)
+    for idx, jogo in enumerate(jogos, start=1):
+        st.write(f"Jogo {idx}: {jogo[0]} vs {jogo[1]}")
 
 if __name__ == "__main__":
     main()
