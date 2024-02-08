@@ -19,7 +19,7 @@ CORES_EQUIPES = {
     "República da Irlanda": "#169B62",
     "Itália": "#009246",
     "México": "#006847",
-    "Nigéria": "#32CD32",
+    "Nigéria": ":flag-ni:",
     "Portugal": "#00843D",
     "Chéquia": "#D41245",
     "Suécia": "#0065BD"
