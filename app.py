@@ -1,12 +1,16 @@
 import streamlit as st
 import itertools
 
+EQUIPES = [
+    "Alemanha", "Argentina", "Austrália", "Brasil", "Camarões",
+    "Coreia do Sul", "Dinamarca", "Escócia", "Espanha", "Estados Unidos",
+    "França", "Grécia", "Inglaterra", "República da Irlanda", "Itália",
+    "México", "Nigéria", "Portugal", "Chéquia", "Suécia"
+]
+
 def cadastrar_equipes():
-    equipes = []
-    for i in range(1, 21):
-        equipe = st.text_input(f"Digite o nome da equipe {i}:")
-        equipes.append(equipe)
-    return equipes
+    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=EQUIPES, default=EQUIPES)
+    return equipes_selecionadas
 
 def criar_grupos(equipes):
     grupos = [f"Grupo {i}" for i in range(1, 6)]
@@ -23,10 +27,11 @@ def gerar_jogos(grupos):
 
 def main():
     st.title("Cadastro de Equipes e Geração de Jogos")
-    st.write("Por favor, insira os nomes das equipes:")
-    equipes = cadastrar_equipes()
+    st.write("Por favor, selecione as equipes participantes:")
 
-    grupos = criar_grupos(equipes)
+    equipes_selecionadas = cadastrar_equipes()
+
+    grupos = criar_grupos(equipes_selecionadas)
 
     st.write("\nGrupos Criados:")
     for nome_grupo, equipes_grupo in grupos.items():
