@@ -3,54 +3,54 @@ import itertools
 
 # Dicionário com as cores correspondentes aos países
 CORES_EQUIPES = {
-    "Alemanha": "blue",
-    "Argentina": "blue",
-    "Austrália": "orange",
-    "Brasil": "orange",
-    "Camarões": "green",
-    "Coreia do Sul": "red",
-    "Dinamarca": "red",
-    "Escócia": "blue",
-    "Espanha": "red",
-    "Estados Unidos": "red",
-    "França": "blue",
-    "Grécia": "blue",
-    "Inglaterra": "blue",
-    "República da Irlanda": "green",
-    "Itália": "green",
-    "México": "green",
-    "Nigéria": "green",
-    "Portugal": "green",
-    "Chéquia": "red",
-    "Suécia": "blue"
+    "Alemanha": "#000000",
+    "Argentina": "#75AADB",
+    "Austrália": "#FFD700",
+    "Brasil": "#FFD700",
+    "Camarões": "#008000",
+    "Coreia do Sul": "#FF0000",
+    "Dinamarca": "#C60C30",
+    "Escócia": "#003399",
+    "Espanha": "#FF0000",
+    "Estados Unidos": "#B22222",
+    "França": "#0055A4",
+    "Grécia": "#0D5EAF",
+    "Inglaterra": "#FFFFFF",
+    "República da Irlanda": "#169B62",
+    "Itália": "#009246",
+    "México": "#006847",
+    "Nigéria": "#32CD32",
+    "Portugal": "#00843D",
+    "Chéquia": "#D41245",
+    "Suécia": "#0065BD"
 }
 
-# Dicionário com os emojis correspondentes aos países no formato shortcode
+# Dicionário com os emojis correspondentes aos países
 EMOJIS_EQUIPES = {
-    "Alemanha": ":flag-de:",
-    "Argentina": ":flag-ar:",
-    "Austrália": ":flag-au:",
-    "Brasil": ":flag-br:",
-    "Camarões": ":flag-cm:",
-    "Coreia do Sul": ":flag-kr:",
-    "Dinamarca": ":flag-dk:",
-    "Escócia": ":flag-scotland:",
-    "Espanha": ":flag-es:",
-    "Estados Unidos": ":flag-us:",
-    "França": ":flag-fr:",
-    "Grécia": ":flag-gr:",
-    "Inglaterra": ":flag-england:",
-    "República da Irlanda": ":flag-ie:",
-    "Itália": ":flag-it:",
-    "México": ":flag-mx:",
-    "Nigéria": ":flag-ng:",
-    "Portugal": ":flag-pt:",
-    "Chéquia": ":flag-cz:",
-    "Suécia": ":flag-se:"
+    "Alemanha": "🇩🇪",
+    "Argentina": "🇦🇷",
+    "Austrália": "🇦🇺",
+    "Brasil": "🇧🇷",
+    "Camarões": "🇨🇲",
+    "Coreia do Sul": "🇰🇷",
+    "Dinamarca": "🇩🇰",
+    "Escócia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    "Espanha": "🇪🇸",
+    "Estados Unidos": "🇺🇸",
+    "França": "🇫🇷",
+    "Grécia": "🇬🇷",
+    "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "República da Irlanda": "🇮🇪",
+    "Itália": "🇮🇹",
+    "México": "🇲🇽",
+    "Nigéria": "🇳🇬",
+    "Portugal": "🇵🇹",
+    "Chéquia": "🇨🇿",
+    "Suécia": "🇸🇪"
 }
 
 def cadastrar_equipes():
-    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()), format_func=lambda equipe: f':color[{CORES_EQUIPES[equipe]}]{EMOJIS_EQUIPES[equipe]} {equipe}')
+    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()), format_func=lambda equipe: f"{EMOJIS_EQUIPES[equipe]} {equipe}")
     return equipes_selecionadas
 
 def criar_grupos(equipes):
@@ -76,8 +76,7 @@ def main():
 
     st.write("\nGrupos Criados:")
     for nome_grupo, equipes_grupo in grupos.items():
-        cor_grupo = CORES_EQUIPES[equipes_grupo[0]] if equipes_grupo else "black"
-        st.markdown(f':color[{cor_grupo}]{nome_grupo}', unsafe_allow_html=True)
+        st.write(f"{nome_grupo}:")
         for equipe in equipes_grupo:
             cor_equipe = CORES_EQUIPES[equipe]
             st.markdown(f'<span style="color:{cor_equipe}; font-size:20px">{EMOJIS_EQUIPES[equipe]} {equipe}</span>', unsafe_allow_html=True)
