@@ -50,7 +50,7 @@ EMOJIS_EQUIPES = {
 }
 
 def cadastrar_equipes():
-    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()), format_func=lambda equipe: f"{EMOJIS_EQUIPES[equipe]} {equipe}")
+    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()), format_func=lambda equipe: f'<span style="color:{CORES_EQUIPES[equipe]}">{EMOJIS_EQUIPES[equipe]} {equipe}</span>')
     return equipes_selecionadas
 
 def criar_grupos(equipes):
@@ -76,7 +76,8 @@ def main():
 
     st.write("\nGrupos Criados:")
     for nome_grupo, equipes_grupo in grupos.items():
-        st.write(f"{nome_grupo}:")
+        cor_grupo = CORES_EQUIPES[equipes_grupo[0]] if equipes_grupo else "#000000"
+        st.write(f'<span style="color:{cor_grupo}; font-weight:bold">{nome_grupo}</span>', unsafe_allow_html=True)
         for equipe in equipes_grupo:
             cor_equipe = CORES_EQUIPES[equipe]
             st.markdown(f'<span style="color:{cor_equipe}; font-size:20px">{EMOJIS_EQUIPES[equipe]} {equipe}</span>', unsafe_allow_html=True)
