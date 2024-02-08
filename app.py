@@ -3,29 +3,29 @@ import itertools
 
 # Dicionário com as cores correspondentes aos países
 CORES_EQUIPES = {
-    "Alemanha": "#000000",
-    "Argentina": "#75AADB",
-    "Austrália": "#FFD700",
-    "Brasil": "#FFD700",
-    "Camarões": "#008000",
-    "Coreia do Sul": "#FF0000",
-    "Dinamarca": "#C60C30",
-    "Escócia": "#003399",
-    "Espanha": "#FF0000",
-    "Estados Unidos": "#B22222",
-    "França": "#0055A4",
-    "Grécia": "#0D5EAF",
-    "Inglaterra": "#FFFFFF",
-    "República da Irlanda": "#169B62",
-    "Itália": "#009246",
-    "México": "#006847",
-    "Nigéria": "#32CD32",
-    "Portugal": "#00843D",
-    "Chéquia": "#D41245",
-    "Suécia": "#0065BD"
+    "Alemanha": "blue",
+    "Argentina": "blue",
+    "Austrália": "orange",
+    "Brasil": "orange",
+    "Camarões": "green",
+    "Coreia do Sul": "red",
+    "Dinamarca": "red",
+    "Escócia": "blue",
+    "Espanha": "red",
+    "Estados Unidos": "red",
+    "França": "blue",
+    "Grécia": "blue",
+    "Inglaterra": "blue",
+    "República da Irlanda": "green",
+    "Itália": "green",
+    "México": "green",
+    "Nigéria": "green",
+    "Portugal": "green",
+    "Chéquia": "red",
+    "Suécia": "blue"
 }
 
-# Dicionário com os emojis correspondentes aos países no formato Markdown
+# Dicionário com os emojis correspondentes aos países no formato shortcode
 EMOJIS_EQUIPES = {
     "Alemanha": ":flag-de:",
     "Argentina": ":flag-ar:",
@@ -76,8 +76,8 @@ def main():
 
     st.write("\nGrupos Criados:")
     for nome_grupo, equipes_grupo in grupos.items():
-        cor_grupo = CORES_EQUIPES[equipes_grupo[0]] if equipes_grupo else "#000000"
-        st.write(f'<span style="color:{cor_grupo}; font-weight:bold">{nome_grupo}</span>', unsafe_allow_html=True)
+        cor_grupo = CORES_EQUIPES[equipes_grupo[0]] if equipes_grupo else "black"
+        st.markdown(f'<span style="color:{cor_grupo}; font-weight:bold">{nome_grupo}</span>', unsafe_allow_html=True)
         for equipe in equipes_grupo:
             cor_equipe = CORES_EQUIPES[equipe]
             st.markdown(f'<span style="color:{cor_equipe}; font-size:20px">{EMOJIS_EQUIPES[equipe]} {equipe}</span>', unsafe_allow_html=True)
