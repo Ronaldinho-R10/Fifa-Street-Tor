@@ -65,11 +65,8 @@ def main():
             equipe_1 = jogo[0]
             equipe_2 = jogo[1]
             st.write(f"Jogo {idx}: {equipe_1} vs {equipe_2}")
-            # Adicionando variação aos IDs dos widgets
-            id_placar_equipe_1 = f"placar_{nome_grupo}_{equipe_1}_{equipe_2}_1"
-            id_placar_equipe_2 = f"placar_{nome_grupo}_{equipe_1}_{equipe_2}_2"
-            placar_equipe_1 = st.number_input(f"Placar de {equipe_1}", min_value=0, step=1, key=id_placar_equipe_1)
-            placar_equipe_2 = st.number_input(f"Placar de {equipe_2}", min_value=0, step=1, key=id_placar_equipe_2)
+            placar_equipe_1 = st.number_input(f"Placar de {equipe_1} ({nome_grupo})", min_value=0, step=1, key=f"{nome_grupo}_{equipe_1}")
+            placar_equipe_2 = st.number_input(f"Placar de {equipe_2} ({nome_grupo})", min_value=0, step=1, key=f"{nome_grupo}_{equipe_2}")
 
 if __name__ == "__main__":
     main()
