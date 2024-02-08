@@ -25,32 +25,8 @@ CORES_EQUIPES = {
     "Suécia": "#0065BD"
 }
 
-# Dicionário com os emojis correspondentes aos países
-EMOJIS_EQUIPES = {
-    "Alemanha": "🇩🇪",
-    "Argentina": "🇦🇷",
-    "Austrália": "🇦🇺",
-    "Brasil": "🇧🇷",
-    "Camarões": "🇨🇲",
-    "Coreia do Sul": "🇰🇷",
-    "Dinamarca": "🇩🇰",
-    "Escócia": "🏴",
-    "Espanha": "🇪🇸",
-    "Estados Unidos": "🇺🇸",
-    "França": "🇫🇷",
-    "Grécia": "🇬🇷",
-    "Inglaterra": "🏴",
-    "República da Irlanda": "🇮🇪",
-    "Itália": "🇮🇹",
-    "México": "🇲🇽",
-    "Nigéria": "🇳🇬",
-    "Portugal": "🇵🇹",
-    "Chéquia": "🇨🇿",
-    "Suécia": "🇸🇪"
-}
-
 def cadastrar_equipes():
-    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()), format_func=lambda equipe: f"{EMOJIS_EQUIPES[equipe]} {equipe}")
+    equipes_selecionadas = st.multiselect("Selecione as equipes:", options=list(CORES_EQUIPES.keys()), default=list(CORES_EQUIPES.keys()))
     return equipes_selecionadas
 
 def criar_grupos(equipes):
@@ -77,12 +53,10 @@ def main():
     st.write("\nGrupos Criados:")
     for nome_grupo, equipes_grupo in grupos.items():
         st.write(f"{nome_grupo}:")
-        with st.beta_container():
-            st.write("| Equipe |")
-            st.write("| --- |")
-            for equipe in equipes_grupo:
-                cor_equipe = CORES_EQUIPES[equipe]
-                st.write(f"| <span style='color:{cor_equipe}; font-size:20px'>{EMOJIS_EQUIPES[equipe]} {equipe}</span> |", unsafe_allow_html=True)
+        table_data = []
+        for equipe in equipes_grupo:
+            table_data.append([equipe])
+        st.table(table_data)
 
     jogos = gerar_jogos(grupos)
 
