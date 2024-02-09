@@ -16,6 +16,7 @@ CORES_EQUIPES = {
     pais: "#{:06x}".format(random.randint(0, 0xFFFFFF)) for pais in PAISES
 }
 
+@st.cache_data
 def cadastrar_equipes():
     equipes_selecionadas = st.multiselect("Selecione as equipes:", options=PAISES, default=PAISES)
     return equipes_selecionadas
