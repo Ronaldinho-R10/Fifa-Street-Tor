@@ -6,9 +6,9 @@ import json
 # Lista de países
 PAISES = [
     "Alemanha", "Argentina", "Austrália", "Brasil", "Camarões",
-    "Coreia do Sul", "Dinamarca", "Escócia", "Espanha", "Estados Unidos",
-    "França", "Grécia", "Inglaterra", "República da Irlanda", "Itália",
-    "México", "Nigéria", "Portugal", "Chéquia", "Suécia"
+    "Coreia do Sul", "Dinamarca", "Espanha", "Estados Unidos",
+    "França", "Grécia",  "República da Irlanda",
+    "México", "Nigéria", "Chéquia", "Suécia"
 ]
 
 # Dicionário com as cores correspondentes aos países
