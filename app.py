@@ -23,7 +23,7 @@ def cadastrar_equipes():
 
 def criar_grupos(equipes):
     random.shuffle(equipes)  # Embaralha as equipes
-    grupos = [f"Grupo {i}" for i in range(1, 6)]
+    grupos = [f"Grupo {i}" for i in range(1, 4)]
     equipe_por_grupo = len(equipes) // len(grupos)
     grupos_equipes = [equipes[i:i + equipe_por_grupo] for i in range(0, len(equipes), equipe_por_grupo)]
     return dict(zip(grupos, grupos_equipes))
@@ -35,7 +35,7 @@ def gerar_jogos(grupos):
         random.shuffle(jogos_grupo)  # Embaralha os jogos
         jogos.extend(jogos_grupo)
     return jogos
-    
+
 @st.cache_data(experimental_allow_widgets=True)
 def main():
     st.title("Cadastro de Equipes e Geração de Jogos")
