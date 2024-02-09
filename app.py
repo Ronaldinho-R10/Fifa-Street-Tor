@@ -35,7 +35,8 @@ def gerar_jogos(grupos):
         random.shuffle(jogos_grupo)  # Embaralha os jogos
         jogos.extend(jogos_grupo)
     return jogos
-
+    
+@st.cache_data(experimental_allow_widgets=True)
 def main():
     st.title("Cadastro de Equipes e Geração de Jogos")
     st.write("Por favor, selecione as equipes participantes:")
