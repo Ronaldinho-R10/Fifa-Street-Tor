@@ -4,38 +4,35 @@ import random
 import json
 
 # Lista de países
-PAISES_GRUPO_1 = ["Inglaterra", "Portugal", "Itália", "Escócia"]
-PAISES_GRUPO_2 = ["Camarões", "França", "Grécia", "Nigéria"]
-PAISES_GRUPO_3 = ["Alemanha", "Argentina", "República da Irlanda", "México"]
-PAISES_GRUPO_4 = ["Suécia", "Brasil", "Estados Unidos", "Austrália"]
-PAISES_GRUPO_5 = ["Espanha", "Coreia do Sul", "Chéquia", "Dinamarca"]
+PAISES_GRUPO_PADRAO = ["Portugal", "Inglaterra", "Itália", "Escócia"]
+PAISES_RESTANTES = [
+    "Alemanha", "Argentina", "Austrália", "Brasil", "Camarões",
+    "Coreia do Sul", "Dinamarca", "Espanha", "Estados Unidos",
+    "França", "Grécia", "República da Irlanda", "México",
+    "Nigéria", "Chéquia", "Suécia"
+]
 
 # Dicionário com as cores correspondentes aos países
 CORES_EQUIPES = {
     pais: "#{:06x}".format(random.randint(0, 0xFFFFFF)) for pais in set(
-        PAISES_GRUPO_1 + PAISES_GRUPO_2 + PAISES_GRUPO_3 + PAISES_GRUPO_4 + PAISES_GRUPO_5
+        PAISES_GRUPO_PADRAO + PAISES_RESTANTES
     )
 }
 
 def cadastrar_equipes():
     st.subheader("Cadastro de Equipes")
-    st.write("Grupo 1:")
-    equipes_grupo_1 = [st.text_input(f"Equipe {i+1}", value=PAISES_GRUPO_1[i]) for i in range(len(PAISES_GRUPO_1))]
-    st.write("Grupo 2:")
-    equipes_grupo_2 = [st.text_input(f"Equipe {i+1}", value=PAISES_GRUPO_2[i]) for i in range(len(PAISES_GRUPO_2))]
-    st.write("Grupo 3:")
-    equipes_grupo_3 = [st.text_input(f"Equipe {i+1}", value=PAISES_GRUPO_3[i]) for i in range(len(PAISES_GRUPO_3))]
-    st.write("Grupo 4:")
-    equipes_grupo_4 = [st.text_input(f"Equipe {i+1}", value=PAISES_GRUPO_4[i]) for i in range(len(PAISES_GRUPO_4))]
-    st.write("Grupo 5:")
-    equipes_grupo_5 = [st.text_input(f"Equipe {i+1}", value=PAISES_GRUPO_5[i]) for i in range(len(PAISES_GRUPO_5))]
+    st.write("Grupo Padrão:")
+    equipes_grupo_padrao = [st.text_input(f"Equipe {i+1}", value=PAISES_GRUPO_PADRAO[i]) for i in range(len(PAISES_GRUPO_PADRAO))]
+
+    st.write("Restante dos Grupos (Aleatório):")
+    equipes_resto_grupos = [st.multiselect("Selecione as equipes:", options=PAISES_RESTANTES, default=random.sample(PAISES_RESTANTES, k=4)) for _ in range(4)]
 
     return {
-        "Grupo 1": equipes_grupo_1,
-        "Grupo 2": equipes_grupo_2,
-        "Grupo 3": equipes_grupo_3,
-        "Grupo 4": equipes_grupo_4,
-        "Grupo 5": equipes_grupo_5
+        "Grupo Padrão": equipes_grupo_padrao,
+        "Grupo 1": equipes_resto_grupos[0],
+        "Grupo 2": equipes_resto_grupos[1],
+        "Grupo 3": equipes_resto_grupos[2],
+        "Grupo 4": equipes_resto_grupos[3]
     }
 
 @st.cache_data(experimental_allow_widgets=True)
@@ -54,8 +51,9 @@ def main():
     # Geração de Jogos
     jogos = []
     for grupo, equipes in grupos.items():
-        for jogo in itertools.combinations(equipes, 2):
-            jogos.append(jogo)
+        if grupo != "Grupo Padrão":
+            for jogo in itertools.combinations(equipes, 2):
+                jogos.append(jogo)
 
     st.write("\nJogos Gerados:")
     for idx, jogo in enumerate(jogos, start=1):
